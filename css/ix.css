@@ -1,0 +1,18 @@
+.table-nonfluid {
+    width: auto;
+}
+input[type='file']{
+    background: transparent;
+    border: none;
+}
+.task{
+    height: 300px;
+}
+
+.container-fluid{
+    margin: 10px;
+}
+
+.link-main{
+    width: 500px;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="IX">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/codemirror.css"/>
+    <link rel="stylesheet" href="../css/base16-dark.css"/>
+    <link rel="stylesheet" href="../css/ix.css"/>
+</head>
+<body class="container-fluid" ng-controller="EditorController">
+<div>
+    <div class="row">
+        <div class="col-xs-6">
+            <form ng-submit="runQuery()">
+                <div class="form-group row">
+                    <label for="query">Write your SQL query here: </label>
+                    <ui-codemirror id="query" ui-codemirror-opts="editorOptions" ng-model="query"></ui-codemirror>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-2">
+                        <button class="btn btn-default" type="submit">Run Query</button>
+                    </div>
+                    <div class="col-xs-10 message" ng-class="">
+                        <p ng-show="success !== null && success===true" class="alert alert-success">Congratulations! You found the correct solution!</p>
+                        <p ng-show="success !== null && success===false" class="alert alert-danger">Sorry, not there yet. Keep trying!</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-6">
+            <label for="query">Here are your tasks:</label>
+            <div class="well bs-component task">
+                <h4>{{ task.title }}</h4>
+                <p>{{task.description}}</p>
+            </div>
+            <div class="form-group">
+                <a ng-if="tasks.current==0" class="btn btn-default" href="04.html">Previous Lesson</a>
+                <button ng-if="tasks.current!=0" class="btn btn-default" type="submit" ng-click="previous()">Previous</button>
+                <button ng-if="tasks.current<tasks.length-1 && success" class="btn btn-default pull-right" type="submit" ng-click="next()">Next</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table ng-repeat="result in results" class="table table-bordered table-striped table-nonfluid">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th ng-repeat="column in result.columns">{{column}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in result.values">
+                <td>{{$index + 1}}</td>
+                <td ng-repeat="value in row">{{value}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<script src="../js/angular.js"></script>
+<script src="../js/sql.js"></script>
+<script src="../js/codemirror.js"></script>
+<script src="../js/sql-mode.js"></script>
+<script src="../js/ui-codemirror.js"></script>
+<script src="../js/ix.js"></script>
+<script src="05.js"></script>
+</body>
+</html>
